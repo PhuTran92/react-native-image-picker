@@ -14,8 +14,10 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.module.annotations.ReactModule;
+import com.imagepicker.picker.ImageListActivity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -122,41 +124,43 @@ public class ImagePickerModule extends ReactContextBaseJavaModule implements Act
 
         this.callback = callback;
         this.options = new Options(options);
+//
+//        int requestCode;
+//        Intent libraryIntent;
+//        requestCode = REQUEST_LAUNCH_LIBRARY;
+//
+//        boolean isSingleSelect = this.options.selectionLimit == 1;
+//        boolean isPhoto = this.options.mediaType.equals(mediaTypePhoto);
+//        boolean isVideo = this.options.mediaType.equals(mediaTypeVideo);
+//
+//        if(isSingleSelect && (isPhoto || isVideo)) {
+//            libraryIntent = new Intent(Intent.ACTION_PICK);
+//        } else {
+//            libraryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//            libraryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+//        }
+//
+//        if(!isSingleSelect) {
+//            libraryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+//        }
+//
+//        if(isPhoto) {
+//            libraryIntent.setType("image/*");
+//        } else if (isVideo) {
+//            libraryIntent.setType("video/*");
+//        } else {
+//            libraryIntent.setType("*/*");
+//            libraryIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
+//        }
+//
+//        try {
+//            currentActivity.startActivityForResult(Intent.createChooser(libraryIntent, null), requestCode);
+//        } catch (ActivityNotFoundException e) {
+//            callback.invoke(getErrorMap(errOthers, e.getMessage()));
+//            this.callback = null;
+//        }
 
-        int requestCode;
-        Intent libraryIntent;
-        requestCode = REQUEST_LAUNCH_LIBRARY;
-
-        boolean isSingleSelect = this.options.selectionLimit == 1;
-        boolean isPhoto = this.options.mediaType.equals(mediaTypePhoto);
-        boolean isVideo = this.options.mediaType.equals(mediaTypeVideo);
-
-        if(isSingleSelect && (isPhoto || isVideo)) {
-            libraryIntent = new Intent(Intent.ACTION_PICK);
-        } else {
-            libraryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-            libraryIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        }
-
-        if(!isSingleSelect) {
-            libraryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        }
-
-        if(isPhoto) {
-            libraryIntent.setType("image/*");
-        } else if (isVideo) {
-            libraryIntent.setType("video/*");
-        } else {
-            libraryIntent.setType("*/*");
-            libraryIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/*", "video/*"});
-        }
-
-        try {
-            currentActivity.startActivityForResult(Intent.createChooser(libraryIntent, null), requestCode);
-        } catch (ActivityNotFoundException e) {
-            callback.invoke(getErrorMap(errOthers, e.getMessage()));
-            this.callback = null;
-        }
+        ImageListActivity.Companion.startForResult(getCurrentActivity(), REQUEST_LAUNCH_LIBRARY, this.options.selectionLimit);
     }
 
     void onAssetsObtained(List<Uri> fileUris) {
@@ -195,7 +199,12 @@ public class ImagePickerModule extends ReactContextBaseJavaModule implements Act
                 break;
 
             case REQUEST_LAUNCH_LIBRARY:
-                onAssetsObtained(collectUrisFromData(data));
+                List<String> path = data.getStringArrayListExtra(ImageListActivity.INTENT_RESULT);
+                List<Uri> uris = new ArrayList<>();
+                for (int i = 0; i < path.size(); i++) {
+                    uris.add(Uri.fromFile(new File((path.get(i)))));
+                }
+                onAssetsObtained(uris);
                 break;
 
             case REQUEST_LAUNCH_VIDEO_CAPTURE:
