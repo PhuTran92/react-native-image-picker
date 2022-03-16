@@ -13,7 +13,9 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
 
   s.source       = { :git => "https://github.com/react-native-image-picker/react-native-image-picker.git", :tag => "v#{s.version}" }
-  s.source_files  = "ios/*.{h,m}"
+
+  s.source_files = 'ios/*.{h,m,xib}'
+  s.resources = ['ios/*.{xib}']
 
   s.dependency 'React-Core'
 end
