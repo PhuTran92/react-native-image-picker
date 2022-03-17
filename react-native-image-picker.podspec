@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'ios/*.{h,m,xib,swift}'
   s.resources = ['ios/*.{xib}']
+  s.public_header_files = 'ios/*.h'
 
   s.dependency 'React-Core'
 end
