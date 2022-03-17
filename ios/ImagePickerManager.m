@@ -76,17 +76,19 @@ RCT_EXPORT_METHOD(launchImageLibrary:(NSDictionary *)options callback:(RCTRespon
     }
 #endif
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    [ImagePickerUtils setupPickerFromOptions:picker options:self.options target:target];
-    picker.delegate = self;
-
-    [self checkPermission:^(BOOL granted) {
-        if (!granted) {
-            self.callback(@[@{@"errorCode": errPermission}]);
-            return;
-        }
-        [self showPickerViewController:picker];
-    }];
+//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    [ImagePickerUtils setupPickerFromOptions:picker options:self.options target:target];
+//    picker.delegate = self;
+//
+//    [self checkPermission:^(BOOL granted) {
+//        if (!granted) {
+//            self.callback(@[@{@"errorCode": errPermission}]);
+//            return;
+//        }
+//        [self showPickerViewController:picker];
+//    }];
+    
+    [self showCustomPickerController];
 }
 
 - (void) showPickerViewController:(UIViewController *)picker
@@ -94,6 +96,21 @@ RCT_EXPORT_METHOD(launchImageLibrary:(NSDictionary *)options callback:(RCTRespon
     dispatch_async(dispatch_get_main_queue(), ^{
         UIViewController *root = RCTPresentedViewController();
         [root presentViewController:picker animated:YES completion:nil];
+    });
+}
+
+- (void) showCustomPickerController {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *root = RCTPresentedViewController();
+        TLPhotosPickerViewController *viewController = [[TLPhotosPickerViewController alloc] init];
+        viewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    //    TLPhotosPickerConfigure *configure = [[TLPhotosPickerConfigure alloc] init];
+    //    configure.numberOfColumn = 3
+    //    viewController.configure = configure
+    //    viewController.selectedAssets = self.selectedAssets
+    //    viewController.logDelegate = self
+
+        [root presentViewController:viewController animated:YES completion:nil];
     });
 }
 
