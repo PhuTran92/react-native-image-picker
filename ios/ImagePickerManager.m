@@ -4,6 +4,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
 #import <PhotosUI/PhotosUI.h>
+#import "RNImagePicker-Swift.h"
 
 @import MobileCoreServices;
 
