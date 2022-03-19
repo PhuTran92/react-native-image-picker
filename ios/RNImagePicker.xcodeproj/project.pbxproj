@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		014A3B6A1C6CF34500B6D375 /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A3B691C6CF34500B6D375 /* ImagePickerManager.m */; };
 		098ECC4027E24E97002D0E85 /* TLAssetsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ECC3F27E24E97002D0E85 /* TLAssetsCollection.swift */; };
 		098ECC4627E24EA6002D0E85 /* TLAlbumPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ECC4227E24EA6002D0E85 /* TLAlbumPopView.swift */; };
 		098ECC4727E24EA6002D0E85 /* TLAssetPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ECC4327E24EA6002D0E85 /* TLAssetPreviewViewController.swift */; };
@@ -37,8 +36,6 @@
 
 /* Begin PBXFileReference section */
 		014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		014A3B681C6CF34500B6D375 /* ImagePickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerManager.h; sourceTree = "<group>"; };
-		014A3B691C6CF34500B6D375 /* ImagePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerManager.m; sourceTree = "<group>"; };
 		098ECC3E27E24E96002D0E85 /* RNImagePicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNImagePicker-Bridging-Header.h"; sourceTree = "<group>"; };
 		098ECC3F27E24E97002D0E85 /* TLAssetsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLAssetsCollection.swift; sourceTree = "<group>"; };
 		098ECC4227E24EA6002D0E85 /* TLAlbumPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLAlbumPopView.swift; sourceTree = "<group>"; };
@@ -53,8 +50,6 @@
 		098ECC5027E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		098EE39A27E39DAF002D0E85 /* ImagePickerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerUtils.swift; sourceTree = "<group>"; };
 		098EE39D27E5FEB3002D0E85 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
-		C1D0CF202509FCCD00304E19 /* ImagePickerUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerUtils.h; sourceTree = "<group>"; };
-		C1D0CF212509FD5E00304E19 /* ImagePickerUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +79,6 @@
 				098ECC4527E24EA6002D0E85 /* TLAssetCollection+Extension.swift */,
 				098ECC4327E24EA6002D0E85 /* TLAssetPreviewViewController.swift */,
 				098ECC3F27E24E97002D0E85 /* TLAssetsCollection.swift */,
-				C1D0CF212509FD5E00304E19 /* ImagePickerUtils.m */,
-				C1D0CF202509FCCD00304E19 /* ImagePickerUtils.h */,
-				014A3B681C6CF34500B6D375 /* ImagePickerManager.h */,
-				014A3B691C6CF34500B6D375 /* ImagePickerManager.m */,
 				098ECC3E27E24E96002D0E85 /* RNImagePicker-Bridging-Header.h */,
 				014A3B5D1C6CF33500B6D375 /* Products */,
 			);
@@ -171,7 +162,6 @@
 				098EE39E27E5FEB3002D0E85 /* ImagePickerManager.swift in Sources */,
 				098ECC4727E24EA6002D0E85 /* TLAssetPreviewViewController.swift in Sources */,
 				098ECC5227E24EB5002D0E85 /* TLPhotoLibrary.swift in Sources */,
-				014A3B6A1C6CF34500B6D375 /* ImagePickerManager.m in Sources */,
 				098ECC5527E24EB5002D0E85 /* TLPhotopickerDataSourcesProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

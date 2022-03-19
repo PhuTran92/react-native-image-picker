@@ -16,7 +16,7 @@ let errPermission = "permission";
 let errOthers = "others";
 var target: ImagePickerTarget? = nil
 
-@objc(ImagePickerManagerSwift)
+@objc(ImagePickerManager)
 class ImagePickerManager: NSObject {
     
     private var callback: RCTResponseSenderBlock? = nil
