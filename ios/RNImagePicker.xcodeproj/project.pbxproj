@@ -19,6 +19,8 @@
 		098ECC5427E24EB5002D0E85 /* TLPhotosPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ECC4E27E24EB5002D0E85 /* TLPhotosPickerViewController.swift */; };
 		098ECC5527E24EB5002D0E85 /* TLPhotopickerDataSourcesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ECC4F27E24EB5002D0E85 /* TLPhotopickerDataSourcesProtocol.swift */; };
 		098ECC5627E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ECC5027E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift */; };
+		098EE39B27E39DAF002D0E85 /* ImagePickerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098EE39A27E39DAF002D0E85 /* ImagePickerUtils.swift */; };
+		098EE39E27E5FEB3002D0E85 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098EE39D27E5FEB3002D0E85 /* ImagePickerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +51,8 @@
 		098ECC4E27E24EB5002D0E85 /* TLPhotosPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLPhotosPickerViewController.swift; sourceTree = "<group>"; };
 		098ECC4F27E24EB5002D0E85 /* TLPhotopickerDataSourcesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLPhotopickerDataSourcesProtocol.swift; sourceTree = "<group>"; };
 		098ECC5027E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		098EE39A27E39DAF002D0E85 /* ImagePickerUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerUtils.swift; sourceTree = "<group>"; };
+		098EE39D27E5FEB3002D0E85 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		C1D0CF202509FCCD00304E19 /* ImagePickerUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerUtils.h; sourceTree = "<group>"; };
 		C1D0CF212509FD5E00304E19 /* ImagePickerUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +71,8 @@
 		014A3B531C6CF33500B6D375 = {
 			isa = PBXGroup;
 			children = (
+				098EE39D27E5FEB3002D0E85 /* ImagePickerManager.swift */,
+				098EE39A27E39DAF002D0E85 /* ImagePickerUtils.swift */,
 				098ECC4D27E24EB5002D0E85 /* TLBundle.swift */,
 				098ECC4B27E24EB5002D0E85 /* TLCollectionTableViewCell.swift */,
 				098ECC5027E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift */,
@@ -154,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				098ECC5327E24EB5002D0E85 /* TLBundle.swift in Sources */,
+				098EE39B27E39DAF002D0E85 /* ImagePickerUtils.swift in Sources */,
 				098ECC4927E24EA6002D0E85 /* TLAssetCollection+Extension.swift in Sources */,
 				098ECC5127E24EB5002D0E85 /* TLCollectionTableViewCell.swift in Sources */,
 				098ECC4827E24EA6002D0E85 /* SynchronizedDictionary.swift in Sources */,
@@ -161,6 +168,7 @@
 				098ECC5427E24EB5002D0E85 /* TLPhotosPickerViewController.swift in Sources */,
 				098ECC4627E24EA6002D0E85 /* TLAlbumPopView.swift in Sources */,
 				098ECC5627E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift in Sources */,
+				098EE39E27E5FEB3002D0E85 /* ImagePickerManager.swift in Sources */,
 				098ECC4727E24EA6002D0E85 /* TLAssetPreviewViewController.swift in Sources */,
 				098ECC5227E24EB5002D0E85 /* TLPhotoLibrary.swift in Sources */,
 				014A3B6A1C6CF34500B6D375 /* ImagePickerManager.m in Sources */,
