@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/react-native-image-picker/react-native-image-picker.git", :tag => "v#{s.version}" }
 
-  s.source_files = 'ios/*.{h,m,xib,swift}'
-  s.resources = ['ios/*.{xib}']
+  s.source_files = 'ios/*.{h,m,xib,swift,png}'
+  s.resources = ['ios/*.{xib,png}']
   s.public_header_files = 'ios/*.h'
 
   s.dependency 'React-Core'

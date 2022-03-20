@@ -36,6 +36,10 @@
 
 /* Begin PBXFileReference section */
 		014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0936A8E027E7663E00A8029F /* TLCollectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLCollectionTableViewCell.xib; sourceTree = "<group>"; };
+		0936A8E127E7664800A8029F /* TLPhotoPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TLPhotoPickerController.bundle; sourceTree = "<group>"; };
+		0936A8E227E7664800A8029F /* TLPhotosPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLPhotosPickerViewController.xib; sourceTree = "<group>"; };
+		0936A8E327E7664800A8029F /* TLPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		098ECC3E27E24E96002D0E85 /* RNImagePicker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNImagePicker-Bridging-Header.h"; sourceTree = "<group>"; };
 		098ECC3F27E24E97002D0E85 /* TLAssetsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLAssetsCollection.swift; sourceTree = "<group>"; };
 		098ECC4227E24EA6002D0E85 /* TLAlbumPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLAlbumPopView.swift; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 		014A3B531C6CF33500B6D375 = {
 			isa = PBXGroup;
 			children = (
+				0936A8DF27E7662800A8029F /* Resources */,
 				098EE39D27E5FEB3002D0E85 /* ImagePickerManager.swift */,
 				098EE39A27E39DAF002D0E85 /* ImagePickerUtils.swift */,
 				098ECC4D27E24EB5002D0E85 /* TLBundle.swift */,
@@ -90,6 +95,17 @@
 				014A3B5C1C6CF33500B6D375 /* libRNImagePicker.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		0936A8DF27E7662800A8029F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0936A8E027E7663E00A8029F /* TLCollectionTableViewCell.xib */,
+				0936A8E327E7664800A8029F /* TLPhotoCollectionViewCell.xib */,
+				0936A8E127E7664800A8029F /* TLPhotoPickerController.bundle */,
+				0936A8E227E7664800A8029F /* TLPhotosPickerViewController.xib */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
