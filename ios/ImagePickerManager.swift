@@ -45,21 +45,21 @@ class ImagePickerManager: NSObject {
         
         self.options = options
         
-//        #if canImport(PhotosUI)
-//        if #available(iOS 14, *) {
-//            if (target == .library) {
-//                let configuration = ImagePickerUtils.makeConfiguration(fromOptions: options, target: target!)
-//                if let configuration = configuration {
-//                    let picker = PHPickerViewController(configuration: configuration)
-//                    picker.delegate = self
-//                    picker.presentationController?.delegate = self
-//
-//                    self.showPickerViewController(picker: picker)
-//                    return
-//                }
-//            }
-//        }
-//        #endif
+        #if canImport(PhotosUI)
+        if #available(iOS 14, *) {
+            if (target == .library) {
+                let configuration = ImagePickerUtils.makeConfiguration(fromOptions: options, target: target!)
+                if let configuration = configuration {
+                    let picker = PHPickerViewController(configuration: configuration)
+                    picker.delegate = self
+                    picker.presentationController?.delegate = self
+
+                    self.showPickerViewController(picker: picker)
+                    return
+                }
+            }
+        }
+        #endif
         
         if target == .camera {
             let picker: UIImagePickerController = UIImagePickerController()
@@ -85,14 +85,16 @@ class ImagePickerManager: NSObject {
     }
     
     private func showCustomPickerController() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             let root = RCTPresentedViewController()
             
             let viewController = TLPhotosPickerViewController()
             viewController.modalPresentationStyle = .fullScreen
+            viewController.delegate = self
             
             var configure = TLPhotosPickerConfigure()
             configure.numberOfColumn = 3
+            configure.maxSelectedAssets = (self?.options["selectionLimit"] as? Int) ?? 0
             configure.allowedVideo = false
             configure.mediaType = .image
             configure.usedCameraButton = false
@@ -105,12 +107,15 @@ class ImagePickerManager: NSObject {
             root?.present(viewController, animated: true, completion: nil)
         }
     }
-
+    
     private func mapImageToAsset(image: UIImage, data: Data?) -> [String: Any] {
+        return mapImageToAsset(image: image, fileType: ImagePickerUtils.getFileType(imageData: data))
+    }
+
+    private func mapImageToAsset(image: UIImage, fileType: String) -> [String: Any] {
         var newImage: UIImage? = nil
         var newData: Data? = nil
         
-        let fileType = ImagePickerUtils.getFileType(imageData: data)
         if let saveToPhotos = self.options["saveToPhotos"] as? Bool, saveToPhotos, target == .camera {
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         }
@@ -308,6 +313,10 @@ extension ImagePickerManager: UIImagePickerControllerDelegate, UINavigationContr
                             data = try Data(contentsOf: url)
                         }
                         assets.append(self.mapImageToAsset(image: image, data: data))
+                        
+                        var response = [String: Any]()
+                        response["assets"] = assets
+                        self.callback?([response])
                     } catch {
                         print(error)
                         self.callback?([["errorCode": errOthers, "errorMessage": error.localizedDescription]])
@@ -327,10 +336,6 @@ extension ImagePickerManager: UIImagePickerControllerDelegate, UINavigationContr
                     self.callback?([["errorCode": errOthers, "errorMessage":  "imagePickerController mediaURL is null"]])
                 }
             }
-            
-            var response = [String: Any]()
-            response["assets"] = assets
-            self.callback?([response])
         }
         
         DispatchQueue.main.async {
@@ -347,6 +352,32 @@ extension ImagePickerManager: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
+extension ImagePickerManager: TLPhotosPickerViewControllerDelegate {
+    func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
+        var assets = [[String: Any]]()
+        for (_, phaAsset) in withTLPHAssets.enumerated() {
+            if let image = phaAsset.fullResolutionImage {
+                var type = "jpg"
+                switch phaAsset.extType() {
+                    case .png:
+                        type = "png"
+                    case .jpg:
+                        type = "jpg"
+                    case .gif:
+                        type = "gif"
+                    default:
+                        type = "jpg"
+                }
+                assets.append(self.mapImageToAsset(image: image, fileType: type))
+            }
+        }
+        
+        var response = [String: Any]()
+        response["assets"] = assets
+        self.callback?([response])
+    }
+}
+
 #if canImport(PhotosUI)
 @available(iOS 14, *)
 extension ImagePickerManager: PHPickerViewControllerDelegate {
@@ -360,7 +391,7 @@ extension ImagePickerManager: PHPickerViewControllerDelegate {
         }
         
         let completionGroup = DispatchGroup()
-        var assets = [[String: Any]?](repeating: nil, count: results.count)
+        var assets = [[String: Any]?]()
         
         for (_, result) in results.enumerated() {
             let provider = result.itemProvider
