@@ -87,6 +87,10 @@ class ImagePickerUtils {
     }
     
     static func getFileType(imageData: Data?) -> String {
+        guard let imageData = imageData else {
+            return "jpg"
+        }
+        
         var firstByte: UInt8 = 0
         imageData.copyBytes(to: &firstByte, count: 1)
         switch firstByte {
