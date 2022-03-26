@@ -61,18 +61,20 @@ class ImagePickerManager: NSObject {
 //        }
 //        #endif
         
-//        let picker: UIImagePickerController = UIImagePickerController()
-//        ImagePickerUtils.setupPickerFromOptions(picker: picker, options: self.options, target: target!)
-//        picker.delegate = self
-//        self.checkPermission { (granted) in
-//            if !granted {
-//                self.callback?([["errorCode", errPermission]])
-//                return
-//            }
-//            self.showPickerViewController(picker: picker)
-//        }
-        
-        self.showCustomPickerController()
+        if target == .camera {
+            let picker: UIImagePickerController = UIImagePickerController()
+            ImagePickerUtils.setupPickerFromOptions(picker: picker, options: self.options, target: target!)
+            picker.delegate = self
+            self.checkPermission { (granted) in
+                if !granted {
+                    self.callback?([["errorCode", errPermission]])
+                    return
+                }
+                self.showPickerViewController(picker: picker)
+            }
+        } else {
+            self.showCustomPickerController()
+        }
     }
     
     private func showPickerViewController(picker: UIViewController) {
@@ -104,7 +106,7 @@ class ImagePickerManager: NSObject {
         }
     }
 
-    private func mapImageToAsset(image: UIImage, data: Data) -> [String: Any] {
+    private func mapImageToAsset(image: UIImage, data: Data?) -> [String: Any] {
         var newImage: UIImage? = nil
         var newData: Data? = nil
         
@@ -124,7 +126,7 @@ class ImagePickerManager: NSObject {
         }
         
         var asset = [String: Any]()
-        asset["type"] = ["image/".appending(fileType)]
+        asset["type"] = "image/".appending(fileType)
         
         let fileName = self.getImageFileName(fileType: fileType)
         let path = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true).appendingPathComponent(fileName)
@@ -223,7 +225,7 @@ class ImagePickerManager: NSObject {
     
     private func getImageFileName(fileType: String) -> String {
         var fileName = NSUUID.init().uuidString
-        fileName = fileName.appending(fileType)
+        fileName = fileName.appending(".")
         return fileName.appending(fileType)
     }
     
@@ -235,11 +237,11 @@ class ImagePickerManager: NSObject {
         return image as? UIImage
     }
     
-    private func getNSURLFromInfo(info: [UIImagePickerController.InfoKey: Any]) -> URL {
+    private func getNSURLFromInfo(info: [UIImagePickerController.InfoKey: Any]) -> URL? {
         if #available(iOS 11.0, *) {
-            return info[UIImagePickerController.InfoKey.imageURL] as! URL
+            return info[UIImagePickerController.InfoKey.imageURL] as? URL
         } else {
-            return info[UIImagePickerController.InfoKey.referenceURL] as! URL
+            return info[UIImagePickerController.InfoKey.referenceURL] as? URL
         }
     }
     
@@ -300,7 +302,12 @@ extension ImagePickerManager: UIImagePickerControllerDelegate, UINavigationContr
             if let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String, mediaType == kUTTypeImage as String {
                 if let image = ImagePickerManager().getUIImageFromInfo(info: info) {
                     do {
-                        assets.append(self.mapImageToAsset(image: image, data: try Data(contentsOf: self.getNSURLFromInfo(info: info))))
+                        var data: Data? = nil
+                        let url = self.getNSURLFromInfo(info: info)
+                        if let url = url {
+                            data = try Data(contentsOf: url)
+                        }
+                        assets.append(self.mapImageToAsset(image: image, data: data))
                     } catch {
                         print(error)
                         self.callback?([["errorCode": errOthers, "errorMessage": error.localizedDescription]])
