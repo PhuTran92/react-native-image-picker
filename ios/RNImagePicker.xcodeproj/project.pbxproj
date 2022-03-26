@@ -20,6 +20,7 @@
 		098ECC5627E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098ECC5027E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift */; };
 		098EE39B27E39DAF002D0E85 /* ImagePickerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098EE39A27E39DAF002D0E85 /* ImagePickerUtils.swift */; };
 		098EE39E27E5FEB3002D0E85 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098EE39D27E5FEB3002D0E85 /* ImagePickerManager.swift */; };
+		099D9A2A27EF1AAA008BE12B /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 099D9A2927EF1AAA008BE12B /* ImagePickerManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +55,7 @@
 		099D9A2427EEF6F0008BE12B /* TLPhotosPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLPhotosPickerViewController.xib; sourceTree = "<group>"; };
 		099D9A2527EEF6F0008BE12B /* TLPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		099D9A2627EEF6F7008BE12B /* TLPhotoPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TLPhotoPickerController.bundle; sourceTree = "<group>"; };
+		099D9A2927EF1AAA008BE12B /* ImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		014A3B531C6CF33500B6D375 = {
 			isa = PBXGroup;
 			children = (
+				099D9A2927EF1AAA008BE12B /* ImagePickerManager.m */,
 				099D9A2627EEF6F7008BE12B /* TLPhotoPickerController.bundle */,
 				099D9A2327EEF6F0008BE12B /* TLCollectionTableViewCell.xib */,
 				099D9A2527EEF6F0008BE12B /* TLPhotoCollectionViewCell.xib */,
@@ -169,6 +172,7 @@
 				098ECC5627E24EB5002D0E85 /* TLPhotoCollectionViewCell.swift in Sources */,
 				098EE39E27E5FEB3002D0E85 /* ImagePickerManager.swift in Sources */,
 				098ECC4727E24EA6002D0E85 /* TLAssetPreviewViewController.swift in Sources */,
+				099D9A2A27EF1AAA008BE12B /* ImagePickerManager.m in Sources */,
 				098ECC5227E24EB5002D0E85 /* TLPhotoLibrary.swift in Sources */,
 				098ECC5527E24EB5002D0E85 /* TLPhotopickerDataSourcesProtocol.swift in Sources */,
 			);

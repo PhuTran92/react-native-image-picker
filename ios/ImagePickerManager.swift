@@ -22,16 +22,14 @@ class ImagePickerManager: NSObject {
     private var callback: RCTResponseSenderBlock? = nil
     private var options: [String: AnyObject] = [String: AnyObject]()
 
-    @objc(launchCamera:callback:)
-    func launchCamera(options: [String: AnyObject], callback: @escaping RCTResponseSenderBlock) -> Void {
+    @objc func launchCamera(_ options: [String: AnyObject], callback: @escaping RCTResponseSenderBlock) {
         target = .camera
         DispatchQueue.main.async {
             self.launchImagePicker(options: options, callback: callback)
         }
     }
     
-    @objc(launchImageLibrary:callback:)
-    func launchImageLibrary(options: [String: AnyObject], callback: @escaping RCTResponseSenderBlock) -> Void {
+    @objc func launchImageLibrary(_ options: [String: AnyObject], callback: @escaping RCTResponseSenderBlock) {
         target = .library
         DispatchQueue.main.async {
             self.launchImagePicker(options: options, callback: callback)
@@ -47,34 +45,34 @@ class ImagePickerManager: NSObject {
         
         self.options = options
         
-        #if canImport(PhotosUI)
-        if #available(iOS 14, *) {
-            if (target == .library) {
-                let configuration = ImagePickerUtils.makeConfiguration(fromOptions: options, target: target!)
-                if let configuration = configuration {
-                    let picker = PHPickerViewController(configuration: configuration)
-                    picker.delegate = self
-                    picker.presentationController?.delegate = self
-                    
-                    self.showPickerViewController(picker: picker)
-                    return
-                }
-            }
-        }
-        #endif
+//        #if canImport(PhotosUI)
+//        if #available(iOS 14, *) {
+//            if (target == .library) {
+//                let configuration = ImagePickerUtils.makeConfiguration(fromOptions: options, target: target!)
+//                if let configuration = configuration {
+//                    let picker = PHPickerViewController(configuration: configuration)
+//                    picker.delegate = self
+//                    picker.presentationController?.delegate = self
+//
+//                    self.showPickerViewController(picker: picker)
+//                    return
+//                }
+//            }
+//        }
+//        #endif
         
-        let picker: UIImagePickerController = UIImagePickerController()
-        ImagePickerUtils.setupPickerFromOptions(picker: picker, options: self.options, target: target!)
-        picker.delegate = self
-        self.checkPermission { (granted) in
-            if !granted {
-                self.callback?([["errorCode", errPermission]])
-                return
-            }
-            self.showPickerViewController(picker: picker)
-        }
+//        let picker: UIImagePickerController = UIImagePickerController()
+//        ImagePickerUtils.setupPickerFromOptions(picker: picker, options: self.options, target: target!)
+//        picker.delegate = self
+//        self.checkPermission { (granted) in
+//            if !granted {
+//                self.callback?([["errorCode", errPermission]])
+//                return
+//            }
+//            self.showPickerViewController(picker: picker)
+//        }
         
-        //self.showCustomPickerController()
+        self.showCustomPickerController()
     }
     
     private func showPickerViewController(picker: UIViewController) {
@@ -85,7 +83,25 @@ class ImagePickerManager: NSObject {
     }
     
     private func showCustomPickerController() {
-        
+        DispatchQueue.main.async {
+            let root = RCTPresentedViewController()
+            
+            let viewController = TLPhotosPickerViewController()
+            viewController.modalPresentationStyle = .fullScreen
+            
+            var configure = TLPhotosPickerConfigure()
+            configure.numberOfColumn = 3
+            configure.allowedVideo = false
+            configure.mediaType = .image
+            configure.usedCameraButton = false
+            configure.autoPlay = false
+            configure.allowedAlbumCloudShared = false
+            configure.allowedVideoRecording = false
+    
+            viewController.configure = configure
+   
+            root?.present(viewController, animated: true, completion: nil)
+        }
     }
 
     private func mapImageToAsset(image: UIImage, data: Data) -> [String: Any] {
